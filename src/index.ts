@@ -1,8 +1,7 @@
 import { Dataset, ReadonlyDataset } from "@opennetwork/rdf-dataset"
 import {DefaultDataFactory, isQuad, Quad, QuadLike} from "@opennetwork/rdf-data-model"
-import { SetLike } from "@opennetwork/rdf-dataset/src/set-like"
 import { source, TransientAsyncIteratorSource } from "iterable"
-import {QuadFind} from "@opennetwork/rdf-dataset/src/match";
+import { QuadFind } from "@opennetwork/rdf-dataset/src/match"
 
 export type AsyncDatasetChange = [
   // Inserts
