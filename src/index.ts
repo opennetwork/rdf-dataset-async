@@ -11,7 +11,7 @@ export type AsyncDatasetChange = [
 ]
 
 export interface AsyncDataset extends Dataset, AsyncIterable<AsyncDatasetChange> {
-
+  close(): void
 }
 
 export class AsyncDataset extends Dataset implements AsyncDataset {
@@ -62,6 +62,10 @@ export class AsyncDataset extends Dataset implements AsyncDataset {
       new ReadonlyDataset(quads)
     ])
     return this
+  }
+
+  close() {
+    this.#source.close()
   }
 
   [Symbol.asyncIterator]() {
