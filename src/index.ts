@@ -20,6 +20,9 @@ export class AsyncDataset extends Dataset implements AsyncDataset {
 
   add(value: Quad | QuadLike): Dataset {
     const quad = isQuad(value) ? value : DefaultDataFactory.fromQuad(value)
+    if (this.has(quad)) {
+      return
+    }
     super.add(quad)
     this.#source.push([
       new ReadonlyDataset([quad]),
@@ -42,7 +45,10 @@ export class AsyncDataset extends Dataset implements AsyncDataset {
 
     function *quads() {
       for (const value of dataset) {
-        yield isQuad(value) ? value : DefaultDataFactory.fromQuad(value)
+        const quad = isQuad(value) ? value : DefaultDataFactory.fromQuad(value)
+        if (!this.has(quad)) {
+          yield quad
+        }
       }
     }
   }
